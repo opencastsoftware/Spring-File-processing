@@ -28,11 +28,11 @@ public class HelloWorld {
         return writer;
     }
 
-    public ArrayList<String> getMessageData() {
+    private ArrayList<String> getMessageData() {
         return messageData;
     }
 
-    public void read() {
+    private void read() {
         System.out.println("Read Start");
         ArrayList<String> messageread = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(this.location))) {
@@ -50,25 +50,19 @@ public class HelloWorld {
         messageData = messageread;
     }
 
-    public void check() {
-        System.out.println("Check Start");
-        for(String item : messageData) {
-            System.out.println(item);
-        }
-        System.out.println("Check End ");
-    }
-
-    public void write() throws IOException{
+    private void write(String initialText, ArrayList<String> dataToWrite) throws IOException{
         System.out.println("write Start");
-	   	createFile("output", messageData);
+	   	createFile(this.writer.getFilename(), initialText, dataToWrite);
 	   	System.out.println("write End");
     }
 
-    private void createFile(String file, ArrayList<String> arrData) throws IOException {
-        FileWriter writer = new FileWriter(file + ".txt");
+    private void createFile(String file, String initialText, ArrayList<String> arrData) throws IOException {
+        final FileWriter writer = new FileWriter(file);
         int size = arrData.size();
+        writer.write(initialText);
+        writer.write("\n");
         for (int i = 0; i < size; i++) {
-            String str = arrData.get(i).toString();
+            String str = arrData.get(i);
             writer.write(str);
             if (i < size-1) {
                 writer.write("\n");
@@ -79,10 +73,9 @@ public class HelloWorld {
 
     public void run() throws IOException {
         this.read();
-        this.writer.setMessageData(messageData);
-        this.writer.write();
-        this.messageData = this.writer.getDataToWrite();
-        this.write();
+        this.writer.setMessageData(this.getMessageData());
+        this.writer.processData();
+        this.write(this.writer.getInitialText(), this.writer.getDataToWrite());
     }
 }
 

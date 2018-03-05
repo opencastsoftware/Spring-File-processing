@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 public interface IFileWriter {
 
-	void write();
+	String getFilename();
+
+	String getInitialText();
+
+	void processData();
 
 	void setMessageData(ArrayList<String> messageData);
 
-	 ArrayList<String> getDataToWrite();
+	ArrayList<String> getDataToWrite();
 }

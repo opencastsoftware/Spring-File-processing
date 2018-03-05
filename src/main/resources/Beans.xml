@@ -15,9 +15,17 @@
 
             public class FileWriter implements IFileWriter {
                 String filename
-                String text
+                String initialText
                 private ArrayList<String> messageData
                 private ArrayList<String> dataToWrite = new ArrayList<String>();
+
+                public String getFilename() {
+                    return filename
+                }
+
+                public String getInitialText() {
+                    return initialText
+                }
 
                 public void setMessageData(ArrayList<String> messageData) {
                     this.messageData  = messageData
@@ -27,11 +35,19 @@
                     return dataToWrite
                 }
 
-                public void write() {
-                    for(String item : messageData) {
-                       if(item.contains("write")) {
-                            dataToWrite.add(item)
-                       }
+                private boolean processFilter(String item) {
+                    return item.contains('write')
+                }
+
+                private String processMapper(String item) {
+                    return "${ item } PROCESSED"
+                }
+
+                public void processData() {
+                    messageData.each {
+                        if (processFilter(it)) {
+                            dataToWrite.add(processMapper(it))
+                        }
                     }
                 }
             }
@@ -40,12 +56,12 @@
         </lang:inline-script>
 
         <lang:property name="filename" value="Sample.txt"/>
-        <lang:property name="text" value="Gary"/>
+        <lang:property name="initialText" value="Gary"/>
 
     </lang:groovy>
 
     <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld" init-method="run">
-        <property name="location" value="/Users/drewmiley/Desktop/development/Spring-File-processing/src/main/java/test"/>
+        <property name="location" value="/Users/drewmiley/Desktop/development/Spring-File-processing/src/main/java/input.txt"/>
         <property name="writer" ref="FileWriter" />
     </bean>
 
