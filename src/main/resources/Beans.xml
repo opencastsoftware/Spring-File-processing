@@ -21,10 +21,16 @@
             public class FileWriter implements IFileWriter {
                 String filename
                 String text
-
-
+                private static ArrayList<String> messageData;
+                public void setMessageData(ArrayList<String> messageData)
+                {
+                    this.messageData  = messageData;
+                }
                 public void write() {
-                    println (filename + " " + text);
+                    for(String item : messageData)
+                    {
+                        System.out.println(item);
+                    }
                 }
             }
         ]]>
@@ -43,7 +49,6 @@
         <property name="writer" ref="FileWriter" />
     </bean>
     <bean id="sample4" class="com.opencast.SpringSample.HelloWorld">
-        <property name="Check" value="#{helloWorld.check()}"/>
         <property name="write" value="#{helloWorld.write()}" />
     </bean>
 

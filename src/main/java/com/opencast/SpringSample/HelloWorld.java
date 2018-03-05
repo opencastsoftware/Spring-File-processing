@@ -18,6 +18,11 @@ public class HelloWorld {
     private static ArrayList<String> messageread = new ArrayList<String>();
 
 
+    public void setMessageData(ArrayList<String> messageData)
+    {
+        this.messageData  = messageData;
+    }
+
 
     public void setRead(String read) {
         this.read  = read;
@@ -41,6 +46,10 @@ public class HelloWorld {
 
     public void getMessage() {
         System.out.println("Your Message : " + read);
+    }
+
+    public ArrayList<String> getMessageData() {
+        return messageData;
     }
 
 
@@ -92,6 +101,7 @@ public class HelloWorld {
     }
 
     public void run() {
+        this.writer.setMessageData(messageData);
         this.writer.write();
     }
 }
