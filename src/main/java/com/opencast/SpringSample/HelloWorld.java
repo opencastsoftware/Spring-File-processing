@@ -79,13 +79,14 @@ public class HelloWorld {
         for(String item : messageData)
         {
             System.out.println(item);
+
         }
         System.out.println("Check End ");
     }
 
     public void write() throws IOException{
         System.out.println("write Start");
-	   	createFile("output", messageData);
+	   	createFile("output", this.writer.getDataToWrite());
 	   	System.out.println("write End");
     }
 

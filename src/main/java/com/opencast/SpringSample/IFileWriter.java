@@ -7,4 +7,6 @@ public interface IFileWriter {
 	void write();
 
 	void setMessageData(ArrayList<String> messageData);
+
+	 ArrayList<String> getDataToWrite();
 }

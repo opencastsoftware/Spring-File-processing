@@ -21,15 +21,25 @@
             public class FileWriter implements IFileWriter {
                 String filename
                 String text
-                private static ArrayList<String> messageData;
+                private static ArrayList<String> messageData
+                private ArrayList<String> dataToWrite = new ArrayList<String>();
+
                 public void setMessageData(ArrayList<String> messageData)
                 {
                     this.messageData  = messageData;
                 }
+                public ArrayList<String> getDataToWrite()
+                {
+                    return dataToWrite;
+                }
                 public void write() {
                     for(String item : messageData)
                     {
-                        System.out.println(item);
+                    System.out.println(item);
+                       if(item.contains("write"))
+                       {
+                            dataToWrite.add(item);
+                       }
                     }
                 }
             }
