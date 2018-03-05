@@ -1,0 +1,50 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/lang
+    http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
+
+    <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld">
+        <property name="read" value="/Users/Robert/Downloads/SpringSample/src/main/java/test"/>
+    </bean>
+
+
+    <lang:groovy id="FileWriter">
+        <lang:inline-script>
+        <![CDATA[
+            package com.opencast.SpringSample;
+
+            public class FileWriter implements IFileWriter {
+                String filename
+                String text
+
+
+                public void write() {
+                    println (filename + " " + text);
+                }
+            }
+        ]]>
+
+        </lang:inline-script>
+
+        <lang:property name="filename" value="Sample.txt"/>
+        <lang:property name="text" value="Gary"/>
+
+    </lang:groovy>
+
+    <bean id="sample2" class="com.opencast.SpringSample.HelloWorld">
+        <property name="Read" value="#{helloWorld.read()}"/>
+    </bean>
+    <bean id="sample3" class="com.opencast.SpringSample.HelloWorld" init-method="run">
+        <property name="writer" ref="FileWriter" />
+    </bean>
+    <bean id="sample4" class="com.opencast.SpringSample.HelloWorld">
+        <property name="Check" value="#{helloWorld.check()}"/>
+        <property name="write" value="#{helloWorld.write()}" />
+    </bean>
+
+</beans>
