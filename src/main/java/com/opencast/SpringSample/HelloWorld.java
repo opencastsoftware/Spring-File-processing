@@ -7,22 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HelloWorld {
-
-
     private String read;
     private String write;
     private String check;
     private IFileWriter writer;
 
-    private static ArrayList<String> messageData;
-    private static ArrayList<String> messageread = new ArrayList<String>();
-
-
-    public void setMessageData(ArrayList<String> messageData)
-    {
-        this.messageData  = messageData;
-    }
-
+    private ArrayList<String> messageData;
 
     public void setRead(String read) {
         this.read  = read;
@@ -40,25 +30,22 @@ public class HelloWorld {
         this.writer = writer;
     }
 
-    public IFileWriter getWriter(){
-        return writer;
+    public void setMessageData(ArrayList<String> messageData) {
+        this.messageData  = messageData;
     }
 
-    public void getMessage() {
-        System.out.println("Your Message : " + read);
+    public IFileWriter getWriter() {
+        return writer;
     }
 
     public ArrayList<String> getMessageData() {
         return messageData;
     }
 
-
     public void read() {
         System.out.println("Read Start");
-
-        String FILENAME;
-        FILENAME = this.read;
-        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+        ArrayList<String> messageread = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(this.read))) {
 
             String sCurrentLine;
 
@@ -74,12 +61,9 @@ public class HelloWorld {
     }
 
     public void check() {
-
         System.out.println("Check Start");
-        for(String item : messageData)
-        {
+        for(String item : messageData) {
             System.out.println(item);
-
         }
         System.out.println("Check End ");
     }
@@ -93,10 +77,12 @@ public class HelloWorld {
     private void createFile(String file, ArrayList<String> arrData) throws IOException {
         FileWriter writer = new FileWriter(file + ".txt");
         int size = arrData.size();
-        for (int i=0;i<size;i++) {
+        for (int i = 0; i < size; i++) {
             String str = arrData.get(i).toString();
             writer.write(str);
-            if(i < size-1) writer.write("\n");
+            if (i < size-1) {
+                writer.write("\n");
+            }
         }
         writer.close();
     }
