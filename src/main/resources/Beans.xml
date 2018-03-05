@@ -9,7 +9,7 @@
     http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
 
     <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld">
-        <property name="read" value="/Users/Robert/Downloads/SpringSample/src/main/java/test"/>
+        <property name="read" value="/Users/drewmiley/Desktop/development/Spring-File-processing/src/main/java/test"/>
     </bean>
 
 
