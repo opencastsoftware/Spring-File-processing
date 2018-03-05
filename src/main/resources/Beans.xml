@@ -8,11 +8,6 @@
     http://www.springframework.org/schema/lang
     http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
 
-    <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld">
-        <property name="read" value="/Users/drewmiley/Desktop/development/Spring-File-processing/src/main/java/test"/>
-    </bean>
-
-
     <lang:groovy id="FileWriter">
         <lang:inline-script>
         <![CDATA[
@@ -21,24 +16,21 @@
             public class FileWriter implements IFileWriter {
                 String filename
                 String text
-                private static ArrayList<String> messageData
+                private ArrayList<String> messageData
                 private ArrayList<String> dataToWrite = new ArrayList<String>();
 
-                public void setMessageData(ArrayList<String> messageData)
-                {
-                    this.messageData  = messageData;
+                public void setMessageData(ArrayList<String> messageData) {
+                    this.messageData  = messageData
                 }
-                public ArrayList<String> getDataToWrite()
-                {
-                    return dataToWrite;
+
+                public ArrayList<String> getDataToWrite() {
+                    return dataToWrite
                 }
+
                 public void write() {
-                    for(String item : messageData)
-                    {
-                    System.out.println(item);
-                       if(item.contains("write"))
-                       {
-                            dataToWrite.add(item);
+                    for(String item : messageData) {
+                       if(item.contains("write")) {
+                            dataToWrite.add(item)
                        }
                     }
                 }
@@ -52,14 +44,9 @@
 
     </lang:groovy>
 
-    <bean id="sample2" class="com.opencast.SpringSample.HelloWorld">
-        <property name="Read" value="#{helloWorld.read()}"/>
-    </bean>
-    <bean id="sample3" class="com.opencast.SpringSample.HelloWorld" init-method="run">
+    <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld" init-method="run">
+        <property name="location" value="/Users/drewmiley/Desktop/development/Spring-File-processing/src/main/java/test"/>
         <property name="writer" ref="FileWriter" />
-    </bean>
-    <bean id="sample4" class="com.opencast.SpringSample.HelloWorld">
-        <property name="write" value="#{helloWorld.write()}" />
     </bean>
 
 </beans>

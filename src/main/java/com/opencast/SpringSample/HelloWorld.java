@@ -7,23 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HelloWorld {
-    private String read;
-    private String write;
-    private String check;
+    private String location;
     private IFileWriter writer;
 
     private ArrayList<String> messageData;
 
-    public void setRead(String read) {
-        this.read  = read;
-    }
-
-    public void setWrite(String write) {
-        this.write  = write;
-    }
-
-    public void setCheck(String check) {
-        this.check  = check;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setWriter(IFileWriter writer) {
@@ -45,7 +35,7 @@ public class HelloWorld {
     public void read() {
         System.out.println("Read Start");
         ArrayList<String> messageread = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(this.read))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(this.location))) {
 
             String sCurrentLine;
 
@@ -70,7 +60,7 @@ public class HelloWorld {
 
     public void write() throws IOException{
         System.out.println("write Start");
-	   	createFile("output", this.writer.getDataToWrite());
+	   	createFile("output", messageData);
 	   	System.out.println("write End");
     }
 
@@ -87,9 +77,12 @@ public class HelloWorld {
         writer.close();
     }
 
-    public void run() {
+    public void run() throws IOException {
+        this.read();
         this.writer.setMessageData(messageData);
         this.writer.write();
+        this.messageData = this.writer.getDataToWrite();
+        this.write();
     }
 }
 
