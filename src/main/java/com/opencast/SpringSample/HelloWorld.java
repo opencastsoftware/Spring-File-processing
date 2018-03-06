@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class HelloWorld {
     private String location;
-    private IFileWriter writer;
+    private static IFileWriter writer;
 
-    private ArrayList<String> messageData;
+    private static  ArrayList<String> messageData;
 
     public void setLocation(String location) {
         this.location = location;
@@ -32,7 +32,7 @@ public class HelloWorld {
         return messageData;
     }
 
-    private void read() {
+    public  void read() {
         System.out.println("Read Start");
         ArrayList<String> messageread = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(this.location))) {
@@ -50,9 +50,9 @@ public class HelloWorld {
         messageData = messageread;
     }
 
-    private void write(String initialText, ArrayList<String> dataToWrite) throws IOException{
+    public void write() throws IOException{
         System.out.println("write Start");
-	   	createFile(this.writer.getFilename(), initialText, dataToWrite);
+	   	createFile(this.writer.getFilename(), this.writer.getInitialText(), this.writer.getDataToWrite());
 	   	System.out.println("write End");
     }
 
@@ -72,10 +72,8 @@ public class HelloWorld {
     }
 
     public void run() throws IOException {
-        this.read();
         this.writer.setMessageData(this.getMessageData());
         this.writer.processData();
-        this.write(this.writer.getInitialText(), this.writer.getDataToWrite());
     }
 }
 

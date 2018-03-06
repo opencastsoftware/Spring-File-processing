@@ -7,6 +7,9 @@
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/lang
     http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
+    <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld" init-method="read">
+        <property name="location" value="/Users/Robert/Downloads/SpringSample/src/main/java/input.txt"/>
+    </bean>
 
     <lang:groovy id="FileWriter">
         <lang:inline-script>
@@ -59,10 +62,10 @@
         <lang:property name="initialText" value="Gary"/>
 
     </lang:groovy>
-
-    <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld" init-method="run">
-        <property name="location" value="/Users/drewmiley/Desktop/development/Spring-File-processing/src/main/java/input.txt"/>
+    <bean id="process" class="com.opencast.SpringSample.HelloWorld" init-method="run">
         <property name="writer" ref="FileWriter" />
+    </bean>
+    <bean id="write" class="com.opencast.SpringSample.HelloWorld" init-method="write">
     </bean>
 
 </beans>
