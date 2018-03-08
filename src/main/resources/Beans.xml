@@ -16,8 +16,7 @@
         http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
         http://www.springframework.org/schema/integration/event
         http://www.springframework.org/schema/integration/event/spring-integration-event.xsd">
-
-    <bean id="helloWorld" class="com.opencast.SpringSample.HelloWorld" init-method="read">
+    <bean id="helloWorld" class="uk.org.ppa.SpringSample.HelloWorld" init-method="read">
         <property name="location" value="/Users/Robert/Downloads/SpringSample/src/main/java/input.txt"/>
     </bean>
 
@@ -73,22 +72,11 @@
 
     </lang:groovy>
     
-    <bean id="process" class="com.opencast.SpringSample.HelloWorld" init-method="run">
+    <bean id="process" class="uk.org.ppa.SpringSample.HelloWorld" init-method="run">
         <property name="writer" ref="FileWriter"/>
     </bean>
 
-    <bean id="write" class="com.opencast.SpringSample.HelloWorld" init-method="write"/>
+    <bean id="write" class="uk.org.ppa.SpringSample.HelloWorld" init-method="write"/>
 
-    <int-event:inbound-channel-adapter
-            id="WriterComplete"
-            channel="fileWriteChannel"
-            event-types="com.opencast.SpringSample.FileProcessEvent"
-            payload-expression="filename"/>
-
-    <int:channel id="fileWriteChannel"/>
-
-    <!-- Writes strings to file -->
-    <int-file:outbound-channel-adapter
-            channel="fileWriteChannel" id="consumer" directory="file:outbound"/>
 
 </beans>
