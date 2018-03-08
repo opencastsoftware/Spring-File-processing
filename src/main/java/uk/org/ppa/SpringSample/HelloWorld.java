@@ -29,10 +29,10 @@ public class HelloWorld {
         return messageData;
     }
 
-    public  void read() {
+    public  void read(File test) {
         System.out.println("Read Start");
         ArrayList<String> messageread = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(this.location))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(test))) {
 
             String sCurrentLine;
 

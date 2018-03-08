@@ -76,7 +76,7 @@
         <property name="writer" ref="FileWriter"/>
     </bean>
 
-    <bean id="write" class="uk.org.ppa.SpringSample.HelloWorld" init-method="write"/>
+    <bean id="write" class="uk.org.ppa.SpringSample.HelloWorld"/>
 
 
 </beans>
