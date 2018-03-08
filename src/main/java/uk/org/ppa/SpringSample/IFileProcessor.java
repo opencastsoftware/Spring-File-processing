@@ -2,7 +2,7 @@ package uk.org.ppa.SpringSample;
 
 import java.util.ArrayList;
 
-public interface IFileWriter {
+public interface IFileProcessor {
 
 	String getFilename();
 

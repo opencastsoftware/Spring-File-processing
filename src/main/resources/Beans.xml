@@ -55,12 +55,14 @@
                     return "${ item } PROCESSED"
                 }
 
-                public void processData() {
+                public List<String> processData(List<String> messageData) {
+                    List<String> dataToWrite = new ArrayList<String>();
                     messageData.each {
                         if (processFilter(it)) {
                             dataToWrite.add(processMapper(it))
                         }
                     }
+                    dataToWrite
                 }
             }
         ]]>

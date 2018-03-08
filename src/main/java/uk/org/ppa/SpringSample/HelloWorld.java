@@ -54,7 +54,7 @@ public class HelloWorld {
     }
 
     private void createFile(String file, String initialText, ArrayList<String> arrData) throws IOException {
-        final FileWriter writer = new FileWriter(file);
+        final WriteToFile writer = new WriteToFile(file);
         int size = arrData.size();
         writer.write(initialText);
         writer.write("\n");
