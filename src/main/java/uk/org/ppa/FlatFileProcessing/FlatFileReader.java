@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class FlatFileReader {
     public ArrayList<String> read(File test) {
-        System.out.println("Read Start");
         ArrayList<String> read = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(test))) {
             String sCurrentLine;
@@ -18,7 +17,6 @@ public class FlatFileReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Read End");
         return read;
     }
 }

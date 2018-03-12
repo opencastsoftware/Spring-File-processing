@@ -10,20 +10,17 @@ public class FlatFileWriter {
     private String fileLocation;
 
     public void write(ArrayList<String> dataToWrite) throws IOException {
-        System.out.println("write Start");
         createFile(fileLocation, dataToWrite);
-        System.out.println("write End");
     }
 
     private void createFile(String fileLocation, ArrayList<String> dataToWrite) throws IOException {
         final File file = new File(fileLocation);
         final FileWriter writer = new FileWriter(file);
         int size = dataToWrite.size();
-        writer.write("\r\n");
         for (int i = 0; i < size; i++) {
             String str = dataToWrite.get(i);
             writer.write(str);
-            if (i < size-1) {
+            if (i < size - 1) {
                 writer.write("\r\n");
             }
         }
