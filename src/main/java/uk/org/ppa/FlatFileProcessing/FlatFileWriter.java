@@ -18,7 +18,7 @@ public class FlatFileWriter {
     }
 
     private void createFile(String fileName, String location, ArrayList<String> arrData) throws IOException {
-        final File file = new File(fileName, location);
+        final File file = new File(location, fileName);
         final FileWriter writer = new FileWriter(file);
         int size = arrData.size();
         writer.write("\n");
