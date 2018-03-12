@@ -1,20 +1,26 @@
 package uk.org.ppa.FlatFileProcessing;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class FlatFileWriter {
+
+    private String location;
+
+    private String fileName;
+
     public void write(ArrayList<String> test) throws IOException {
         System.out.println("write Start");
-        createFile("output.txt", "gdfgd", test);
+        createFile(fileName, location, test);
         System.out.println("write End");
     }
 
-    private void createFile(String file, String initialText, ArrayList<String> arrData) throws IOException {
+    private void createFile(String fileName, String location, ArrayList<String> arrData) throws IOException {
+        final File file = new File(fileName, location);
         final FileWriter writer = new FileWriter(file);
         int size = arrData.size();
-        writer.write(initialText);
         writer.write("\n");
         for (int i = 0; i < size; i++) {
             String str = arrData.get(i);
@@ -24,5 +30,13 @@ public class FlatFileWriter {
             }
         }
         writer.close();
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
