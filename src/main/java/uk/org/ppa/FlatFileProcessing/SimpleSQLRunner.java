@@ -36,11 +36,13 @@ public class SimpleSQLRunner {
     private void runSqlString(String SQL) throws ClassNotFoundException, SQLException {
         Class.forName(mdrrDriverClassName);
         Connection conn = DriverManager.getConnection(mdrrUrl, mdrrUsername, mdrrPassword);
+        conn.setAutoCommit(false);
         Statement statement = conn.createStatement();
         statement.execute(SQL);
         statement.close();
         conn.close();
     }
+
 
     public void setMdrrPropertiesLocation(String mdrrPropertiesLocation) {
         this.mdrrPropertiesLocation = mdrrPropertiesLocation;
