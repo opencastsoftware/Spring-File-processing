@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class SimpleSQLInsertor {
+public class SimpleSQLRunner {
 
     private String mdrrPropertiesLocation;
 
