@@ -11,48 +11,32 @@ import java.util.Properties;
 public class SimpleSQLInsertor {
 
     private String mdrrPropertiesLocation;
-    public   String mdrrDriverClassName;
-    public  String mdrrUrl;
-    public String mdrrUsername;
-    public String mdrrPassword;
+
+    private String mdrrDriverClassName;
+    private String mdrrUrl;
+    private String mdrrUsername;
+    private String mdrrPassword;
 
     public void runSQL(ArrayList<String> sqlInserts) throws IOException {
         Properties properties = new Properties();
         properties.load(new FileInputStream(mdrrPropertiesLocation));
-        if(properties != null)
-        {
-            mdrrDriverClassName = properties.getProperty("mdrrDriverClassName");
-            mdrrUrl = properties.getProperty("mdrrUrl");
-            mdrrUsername = properties.getProperty("mdrrUsername");
-            mdrrPassword = properties.getProperty("mdrrPassword");
-
-        }
-        else
-        {
-            System.out.println("properties not found");
-        }
+        mdrrDriverClassName = properties.getProperty("mdrrDriverClassName");
+        mdrrUrl = properties.getProperty("mdrrUrl");
+        mdrrUsername = properties.getProperty("mdrrUsername");
+        mdrrPassword = properties.getProperty("mdrrPassword");
         try {
             for (String SQL:sqlInserts) {
-                runSql(SQL);
+                runSqlString(SQL);
             }
-
         } catch(SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        for (int i = 0; i < sqlInserts.size(); i++) {
-
-            String str = sqlInserts.get(i);
-            System.out.println(str);
-        }
     }
 
-    public void runSql(String SQL) throws ClassNotFoundException, SQLException {
-        Connection conn = null;
-        Statement statement = null;
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        conn = DriverManager.getConnection(mdrrUrl, mdrrUsername, mdrrPassword);
-        statement = conn.createStatement();
+    private void runSqlString(String SQL) throws ClassNotFoundException, SQLException {
+        Class.forName(mdrrDriverClassName);
+        Connection conn = DriverManager.getConnection(mdrrUrl, mdrrUsername, mdrrPassword);
+        Statement statement = conn.createStatement();
         statement.execute(SQL);
         statement.close();
         conn.close();
