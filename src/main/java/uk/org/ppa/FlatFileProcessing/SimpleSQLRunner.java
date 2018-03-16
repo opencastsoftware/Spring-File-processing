@@ -17,7 +17,7 @@ public class SimpleSQLRunner {
     private String mdrrUsername;
     private String mdrrPassword;
 
-    public void runSQL(ArrayList<String> sqlInserts) throws IOException {
+    public ArrayList<String> runSQL(ArrayList<String> sqlInserts) throws IOException {
         Properties properties = new Properties();
         properties.load(new FileInputStream(mdrrPropertiesLocation));
         mdrrDriverClassName = properties.getProperty("mdrrDriverClassName");
@@ -31,6 +31,7 @@ public class SimpleSQLRunner {
         } catch(SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return sqlInserts;
     }
 
     private void runSqlString(String SQL) throws ClassNotFoundException, SQLException {

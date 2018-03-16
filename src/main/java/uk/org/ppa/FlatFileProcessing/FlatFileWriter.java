@@ -9,8 +9,9 @@ public class FlatFileWriter {
 
     private String fileLocation;
 
-    public void write(ArrayList<String> dataToWrite) throws IOException {
+    public ArrayList<String> write(ArrayList<String> dataToWrite) throws IOException {
         createFile(fileLocation, dataToWrite);
+        return dataToWrite;
     }
 
     private void createFile(String fileLocation, ArrayList<String> dataToWrite) throws IOException {
