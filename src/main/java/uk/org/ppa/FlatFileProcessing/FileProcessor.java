@@ -9,6 +9,8 @@ public abstract class FileProcessor {
 
 	private String propertiesLocation;
 
+
+
 	private String header;
 
 	private String footer;
@@ -17,9 +19,22 @@ public abstract class FileProcessor {
 
 	private String post;
 
-	private List<String> headers;
+	private ArrayList<String> headers;
 
-	private List<String> lengths;
+	public void setHeaders(ArrayList<String> headers) {
+		this.headers = headers;
+	}
+
+	public ArrayList<String> getLengths() {
+		return lengths;
+	}
+
+	public void setLengths(ArrayList<String> lengths) {
+		this.lengths = lengths;
+	}
+
+	private ArrayList<String> lengths;
+
 
 	public void setPropertiesLocation(String propertiesLocation) {
 		this.propertiesLocation = propertiesLocation;
@@ -62,11 +77,11 @@ public abstract class FileProcessor {
 	}
 
 	Map<String, String> getRecordMap(String record) {
+
 		Map<String, String> recordMap = new HashMap<>();
 		if (headers.size() != lengths.size()) {
 			return null;
 		}
-
 		int stringIndex = 0;
 		for (int i = 0; i < headers.size(); i++) {
 			String value = record.substring(stringIndex, stringIndex + Integer.parseInt(lengths.get(i)));
@@ -76,12 +91,7 @@ public abstract class FileProcessor {
 		return recordMap;
 	}
 
-	void loadProperties() throws IOException {
-		Properties properties = new Properties();
-		properties.load(new FileInputStream(propertiesLocation));
-		headers = Arrays.asList(properties.getProperty("headers").split(","));
-		lengths = Arrays.asList(properties.getProperty("lengths").split(","));
-	}
+
 
 	abstract ArrayList<String> getProcessedData(ArrayList<String> unprocessedData);
 }
