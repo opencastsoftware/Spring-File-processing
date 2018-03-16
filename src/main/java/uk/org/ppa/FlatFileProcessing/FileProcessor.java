@@ -7,10 +7,6 @@ import java.util.*;
 
 public abstract class FileProcessor {
 
-	private String propertiesLocation;
-
-
-
 	private String header;
 
 	private String footer;
@@ -34,11 +30,6 @@ public abstract class FileProcessor {
 	}
 
 	private ArrayList<String> lengths;
-
-
-	public void setPropertiesLocation(String propertiesLocation) {
-		this.propertiesLocation = propertiesLocation;
-	}
 
 	public void setHeader(String header) {
 		this.header = header;
