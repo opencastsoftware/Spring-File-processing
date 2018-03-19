@@ -1,5 +1,3 @@
-package uk.org.ppa.FlatFileProcessing;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -68,7 +66,6 @@ public abstract class FileProcessor {
 	}
 
 	Map<String, String> getRecordMap(String record) {
-
 		Map<String, String> recordMap = new HashMap<>();
 		if (headers.size() != lengths.size()) {
 			return null;
@@ -81,8 +78,6 @@ public abstract class FileProcessor {
 		}
 		return recordMap;
 	}
-
-
 
 	abstract ArrayList<String> getProcessedData(ArrayList<String> unprocessedData);
 }
